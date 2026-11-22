@@ -19,12 +19,13 @@
 
 html {
     scroll-behavior:smooth;
+    scroll-padding-top: 25px;
 }
 
 body {
     background: var(--paper);
     color:var(--ink);
-    font-family: (var(--sans));
+    font-family: var(--sans);
     font-size:14px;
     line-height:1.7;
 }
@@ -34,7 +35,7 @@ a {
     text-decoration:none
 }
 
-img{
+img {
     display:block;
     width:100%;
     height:100%;
@@ -56,21 +57,29 @@ img{
 }
 
 .announcement a {
+    display: inline-block;
     margin-left: 8px;
     color: var(--APRICOT);
     border-bottom: 1px solid rgba(212, 178, 167, .65);
+    transition: color 0.25s ease, border-color 0.25s ease;
+}
+
+.announcement a:hover {
+    color: white;
+    border-color: white;
 }
 
 .site-header {
-    height: 88px;
+    min-height: 88px;
     padding: 0 6.5%;
     display: flex;
     align-items: center;
     justify-content: space-between;
+    gap: 28px;
     background: var(--paper);
     border-bottom: 1px solid rgba(74,93,78,.12);
     position: relative; 
-    z-index: 2;   
+    z-index: 5;   
 }
 
 .wordmark {
@@ -216,7 +225,7 @@ letter-spacing: -2.8px;
     font-weight: 600;
     letter-spacing: 1.2px;
     text-transform: uppercase;
-    transition: background .25s ease, color .25s, border-color .25s ease;
+    transition: background 0.25s ease, color 0.25s ease, border-color .25s ease;
 
 }
 
@@ -349,7 +358,7 @@ letter-spacing: 1.5px;
 
 /*collection */
 .collection {
-    padding: 85px 8.5% 100PX;
+    padding: 85px 8.5% 100px;
     background: #e9e1da;
 }
 
@@ -385,11 +394,14 @@ letter-spacing: 1.5px;
 
 .product-grid {
     display: grid;
-    grid-template-columns: repeat(3, 1fr);
+    grid-template-columns: repeat(3, minmax(0,1fr));
     gap: 24px;
     align-items: start;
 }
 
+.product-card {
+    min-width: none;
+}
 .product-card-offset {
     margin-top: 70px;
 }
@@ -435,6 +447,13 @@ letter-spacing: 1.5px;
     background: var(--paper);
     color: var(--evergreen);
     font-size: 15px;
+    transition: background 0.25s ease, color 0.25s ease, transform 0.25s ease;
+}
+
+.product-image:hover .product-arrow {
+    background: var(--evergreen);
+    color: var(--paper);
+    transform: rotate(45deg);
 }
 
 .product-meta {
@@ -749,8 +768,30 @@ line-height: 1.1;
 
      .footer-signoff {display: none;}
 }
+@media (max-width:750px) {
+    .quiz-feature { 
+        grid-template-columns: 1fr;
+    }
 
+    .quiz-image {min-height: 390px;}
+
+    .quiz-copy {
+        position: relative;
+        padding: 60px 8%;
+     min-height: auto;}
+    .quiz-decoration {display: none;}
+    .quiz-copy h2 {font-size: clamp(48px, 9vw, 60px);}
+}
 @media (max-width: 650px) {
+    .quiz-decoration {display: none;}
+    .quiz-copy {position: relative;
+    padding: 60px 8%;
+    min-height: auto;}
+
+    .quiz-copy > *:not(.quiz-decoration) {
+        position: relative;
+        z-index: 1;
+    }
     .announcement {
         font-size: 8px;
     }
